@@ -1,0 +1,22 @@
+
+v
+java:S1104$"TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ8ŸİÁ’¹1
+w
+java:S1104%"ZMake ordersXMLTable a static final constant or non-public and provide accessors if needed.(àş´8ŸİÁ’¹1
+p
+java:S1104&"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³38ŸİÁ’¹1
+r
+java:S1104'"UMake menuItems a static final constant or non-public and provide accessors if needed.(ƒ´ãÄ8ŸİÁ’¹1
+v
+java:S1104("YMake quantityItems a static final constant or non-public and provide accessors if needed.(÷öäí8ŸİÁ’¹1
+o	java:S116#"SRename this field "table_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ïˆã8¯İÁ’¹1
+O
+java:S1172;"2Remove this unused method parameter "actionEvent".(‚§Ê‰8±İÁ’¹1
+T
+java:S1172K"2Remove this unused method parameter "actionEvent".(ı„ƒ‘ÿÿÿÿÿ8³İÁ’¹1
+T
+java:S1172Q"2Remove this unused method parameter "actionEvent".(‚¤³¿şÿÿÿÿ8³İÁ’¹1
+\
+java:S1128"?Remove this unused import 'java.time.format.DateTimeFormatter'.(‰÷÷ª8´İÁ’¹1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8´İÁ’¹1

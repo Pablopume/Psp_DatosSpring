@@ -1,0 +1,15 @@
+
+n
+java:S1104 "XMake buttonDelete a static final constant or non-public and provide accessors if needed.(å‘Ğ
+p
+java:S1104!"ZMake ordersXMLTable a static final constant or non-public and provide accessors if needed.(àş´
+o
+java:S1104""TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ
+i
+java:S1104#"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³3
+H
+java:S1172J"2Remove this unused method parameter "actionEvent".(‹‡Æ„
+X
+java:S1128";Remove this unused import 'jakarta.xml.bind.JAXBException'.(¬å†À8°ºà‘¹1
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8°ºà‘¹1
