@@ -7,7 +7,11 @@ import jakarta.inject.Inject;
 import lombok.extern.log4j.Log4j2;
 import model.Customer;
 import model.errors.CustomerError;
+import org.springframework.dao.DataAccessException;
 import io.vavr.control.Either;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,54 +26,26 @@ public class CustomerDB implements CustomerDAO {
     public CustomerDB(DBConnectionPool db) {
         this.db = db;
     }
+//Catch DuplicatedKeyException
 
     public Either<CustomerError, List<Customer>> add(Customer customer) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(db.getDataSource());
         Either<CustomerError, List<Customer>> result = null;
-        Connection myConnection = null;
         try {
-            myConnection = db.getConnection();
-            myConnection.setAutoCommit(false);
-
-            try (PreparedStatement credentialsStatement = myConnection.prepareStatement(SqlQueries.INSERT_INTO_CREDENTIALS_ID_USER_NAME_PASSWORD_VALUES)) {
-                credentialsStatement.setInt(1, customer.getId());
-                credentialsStatement.setString(2, customer.getFirst_name());
-                credentialsStatement.setString(3, customer.getFirst_name().toLowerCase());
-                credentialsStatement.executeUpdate();
-
-                myConnection.commit();
-
+                KeyHolder keyHolder = new GeneratedKeyHolder();
+                jdbcTemplate.update(connection -> {
+                    PreparedStatement ps = connection.prepareStatement(SqlQueries.INSERT_INTO_CREDENTIALS_ID_USER_NAME_PASSWORD_VALUES, Statement.RETURN_GENERATED_KEYS);
+                    ps.setString(1, customer.getFirst_name());
+                    ps.setString(2, customer.getFirst_name().toLowerCase());
+                    return ps;
+                }, keyHolder);
+                customer.setId(keyHolder.getKey().intValue());
                 result = Either.right(getAll().get());
-                try (PreparedStatement statement = myConnection.prepareStatement(SqlQueries.INSERT_INTO_CUSTOMERS_ID_FIRST_NAME_LAST_NAME_EMAIL_PHONE_DATE_OF_BIRTH_VALUES, Statement.RETURN_GENERATED_KEYS)) {
-                    statement.setInt(1, customer.getId());
-                    statement.setString(2, customer.getFirst_name());
-                    statement.setString(3, customer.getLast_name());
-                    statement.setString(4, customer.getEmail());
-                    statement.setString(5, customer.getPhone());
-                    statement.setDate(6, Date.valueOf(customer.getDob()));
-                    statement.executeUpdate();
-                    ResultSet rs = statement.getGeneratedKeys();
-                    rs.next();
+                jdbcTemplate.update(SqlQueries.INSERT_INTO_CUSTOMERS_ID_FIRST_NAME_LAST_NAME_EMAIL_PHONE_DATE_OF_BIRTH_VALUES, customer.getId(), customer.getFirst_name(), customer.getLast_name(), customer.getEmail(), customer.getPhone(), Date.valueOf(customer.getDob()));
 
-                }
-            }
-        } catch (SQLException e) {
-            if (myConnection != null) {
-                try {
-                    myConnection.rollback();
-                } catch (SQLException excep) {
-                    excep.printStackTrace();
-                }
-            }
+        } catch (DataAccessException e) {
+            System.out.println(e.getMessage());
             result = Either.left(new CustomerError(0, Constants.ERROR_WHILE_RETRIEVING_ORDERS));
-        } finally {
-            if (myConnection != null) {
-                try {
-                    myConnection.setAutoCommit(true);
-                    myConnection.close();
-                } catch (SQLException excep) {
-                    result = Either.left(new CustomerError(0, Constants.ERROR_WHILE_RETRIEVING_ORDERS));
-                }
-            }
         }
         return result;
     }
@@ -140,14 +116,14 @@ public class CustomerDB implements CustomerDAO {
     @Override
     public Either<CustomerError, List<Customer>> getAll() {
         Either<CustomerError, List<Customer>> result = null;
-        try (Connection myConnection = db.getConnection();
-             Statement statement = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                     ResultSet.CONCUR_READ_ONLY)) {
-            ResultSet rs = statement.executeQuery("select * from customers");
-            result = Either.right(readRS(rs).get());
-            db.closeConnection(myConnection);
-        } catch (SQLException e) {
-            result = Either.left(new CustomerError(0, Constants.ERROR_WHILE_RETRIEVING_ORDERS));
+        JdbcTemplate jtm = new JdbcTemplate(db.getDataSource());
+
+        List<Customer> l = jtm.query("select * from customers", new MapCustomer());
+        if(l.isEmpty()){
+            result= Either.left(new CustomerError(0, Constants.ERROR_WHILE_RETRIEVING_ORDERS));
+        }
+        else{
+            result= Either.right(l);
         }
         return result;
     }

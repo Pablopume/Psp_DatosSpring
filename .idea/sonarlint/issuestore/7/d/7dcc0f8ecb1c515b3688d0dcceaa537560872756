@@ -25,6 +25,8 @@ s
 java:S1104+"VMake customerId a static final constant or non-public and provide accessors if needed.(ŒÊ»ê8×ÏÎŠ¹1
 u
 java:S1104,"SMake tableId a static final constant or non-public and provide accessors if needed.(–Ö³ªþÿÿÿÿ8¢ñÏŠ¹1
+d
+java:S6813."BRemove this field injection and use constructor injection instead.(Áº–Žüÿÿÿÿ8§óøòº1
 t
 java:S3776Z"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(’œ£»þÿÿÿÿ8„ó¼Š¹1
 T

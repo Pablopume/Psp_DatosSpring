@@ -7,6 +7,8 @@ o
 java:S1104""TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ
 i
 java:S1104#"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³3
+d
+java:S6813$"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8Îîøòº1
 H
 java:S1172J"2Remove this unused method parameter "actionEvent".(‹‡Æ„
 X

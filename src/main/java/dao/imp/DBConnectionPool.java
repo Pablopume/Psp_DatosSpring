@@ -32,7 +32,6 @@ public class DBConnectionPool {
         hikariConfig.setPassword(config.getProperty("password"));
         hikariConfig.setDriverClassName(config.getProperty("driver"));
         hikariConfig.setMaximumPoolSize(4);
-
         hikariConfig.addDataSourceProperty("cachePrepStmts", true);
         hikariConfig.addDataSourceProperty("prepStmtCacheSize", 250);
         hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", 2048);

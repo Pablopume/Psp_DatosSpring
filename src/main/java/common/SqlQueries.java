@@ -2,7 +2,7 @@ package common;
 
 public class SqlQueries {
 
-    public static final String INSERT_INTO_CREDENTIALS_ID_USER_NAME_PASSWORD_VALUES = "insert into credentials (id, user_name, password) values (?,?,?)";
+    public static final String INSERT_INTO_CREDENTIALS_ID_USER_NAME_PASSWORD_VALUES = "insert into credentials (user_name, password) values (?,?)";
     public static final String INSERT_INTO_CUSTOMERS_ID_FIRST_NAME_LAST_NAME_EMAIL_PHONE_DATE_OF_BIRTH_VALUES = "insert into customers (id, first_name, last_name, email, phone, date_of_birth) values (?,?,?,?,?,?)";
     public static final String DELETE_FROM_CUSTOMERS_WHERE_ID = "DELETE FROM customers WHERE id = ?";
     public static final String DELETE_FROM_CREDENTIALS_WHERE_ID = "DELETE FROM credentials WHERE id = ?";

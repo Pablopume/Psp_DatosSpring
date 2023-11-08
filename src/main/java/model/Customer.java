@@ -15,8 +15,10 @@ public class Customer {
     private String email;
     private String phone;
     private LocalDate dob;
+    private Credentials credentials;
 
-    public Customer(String first_name, String last_name, String email, String phone, LocalDate dob) {
+    public Customer(int id, String first_name, String last_name, String email, String phone, LocalDate dob) {
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;

@@ -56,7 +56,7 @@ public class AddOrderController extends BaseScreenController {
         addOrderViewModel.loadState();
     }
 
-    public void addOrder(ActionEvent actionEvent) {
+    public void addOrder() {
         try {
             int selectedCustomerId = Integer.parseInt(idCustomer.getValue());
             int selectedTableId = Integer.parseInt(table_id.getValue());
@@ -72,13 +72,13 @@ public class AddOrderController extends BaseScreenController {
         }
     }
 
-    public void addItem(ActionEvent actionEvent) {
+    public void addItem() {
          ObservableList<OrderItem> orderItem= ordersXMLTable.getItems();
           orderItem.add(new OrderItem(addOrderViewModel.getOrderItemService().getAutoId(),addOrderViewModel.getServices().getLastId()+1,addOrderViewModel.getMenuItemService().getByName(menuItems.getValue()),Integer.parseInt(quantityItems.getText())));
           ordersXMLTable.setItems(orderItem);
     }
 
-    public void removeOrder(ActionEvent actionEvent) {
+    public void removeOrder() {
 
         ObservableList<OrderItem> orderItemXMLS= ordersXMLTable.getItems();
         OrderItem selectedOrder = ordersXMLTable.getSelectionModel().getSelectedItem();

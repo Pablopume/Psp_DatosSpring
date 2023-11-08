@@ -20,7 +20,7 @@ public class AddCustomerViewModel {
     public AddCustomerViewModel(CustomerServices services) {
         this.services = services;
         this.state = new SimpleObjectProperty<>(new AddCustomerState(new ArrayList<>(), null));
-        ;
+
     }
 
     public ReadOnlyObjectProperty<AddCustomerState> getState() {

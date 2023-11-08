@@ -20,6 +20,8 @@ module javafx {
     requires com.zaxxer.hikari;
     requires commons.dbcp2;
     requires jakarta.annotation;
+    requires spring.jdbc;
+    requires spring.tx;
 
     exports ui.screens.orders.deleteorders;
     exports services.impl;
