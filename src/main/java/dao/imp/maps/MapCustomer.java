@@ -1,4 +1,4 @@
-package dao.imp;
+package dao.imp.maps;
 
 import common.Constants;
 import model.Customer;

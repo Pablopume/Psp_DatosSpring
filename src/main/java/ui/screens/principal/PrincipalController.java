@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import model.Credentials;
 import ui.screens.common.BaseScreenController;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Log4j2
+@Data
 public class PrincipalController {
 
     public MenuItem addOrders;
@@ -50,8 +52,6 @@ public class PrincipalController {
     public PrincipalController(Instance<Object> instance) {
         this.instance = instance;
         alert = new Alert(Alert.AlertType.NONE);
-
-
     }
 
     private void loadScreen(Screens pantalla) {
@@ -124,7 +124,7 @@ public class PrincipalController {
     }
 
 
-    public void exit(ActionEvent actionEvent) {
+    public void exit() {
 
         primaryStage.fireEvent(new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
@@ -135,7 +135,7 @@ public class PrincipalController {
     }
 
     @FXML
-    private void cambiarcss(ActionEvent actionEvent) {
+    private void cambiarcss() {
         primaryStage.getScene().getRoot().getStylesheets().clear();
 
 
@@ -178,6 +178,8 @@ public class PrincipalController {
         menuPrincipal.setVisible(true);
         if(usuario.getId()==-1){
             addOrders.setVisible(false);
+            menuCustomers.setVisible(true);
+            deleteOrders.setVisible(true);
         }else {
             addOrders.setVisible(true);
             menuCustomers.setVisible(false);

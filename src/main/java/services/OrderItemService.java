@@ -15,7 +15,7 @@ public interface OrderItemService {
 
     Either<OrderError, Integer> delete(Order o);
 
-    Integer getTotalPrice(List<OrderItem> orderItems);
+    double getTotalPrice(int id);
 
     List<OrderItem> getOrdersById(int id);
     int getAutoId();

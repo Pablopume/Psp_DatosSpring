@@ -11,7 +11,7 @@ public class MenuItem {
     private int id;
     private String name;
     private String description;
-    private int price;
+    private double price;
 
     @Override
     public String toString() {

@@ -58,4 +58,6 @@ module javafx {
     exports model.errors;
     exports services;
     opens dao.imp;
+    exports dao.imp.maps;
+    opens dao.imp.maps;
 }

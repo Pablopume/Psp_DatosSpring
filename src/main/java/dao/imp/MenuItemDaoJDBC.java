@@ -49,7 +49,7 @@ public class MenuItemDaoJDBC implements MenuItemDAO {
                 int id = rs.getInt(Constants.MENU_ITEM_ID);
                 String name = rs.getString(Constants.NAME);
                 String description = rs.getString(Constants.DESCRIPTION);
-                int price = rs.getInt(Constants.PRICE);
+                double price = rs.getDouble(Constants.PRICE);
                 menuItems.add(new MenuItem(id, name, description, price));
             }
         } catch (SQLException e) {

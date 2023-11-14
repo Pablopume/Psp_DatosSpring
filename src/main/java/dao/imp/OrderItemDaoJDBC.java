@@ -141,7 +141,7 @@ public class OrderItemDaoJDBC implements OrderItemDAO {
             result.setId(rs.getInt("menu_item_id"));
             result.setName(rs.getString("name"));
             result.setDescription(rs.getString("description"));
-            result.setPrice(rs.getInt("price"));
+            result.setPrice(rs.getDouble("price"));
         }
         return result;
     }

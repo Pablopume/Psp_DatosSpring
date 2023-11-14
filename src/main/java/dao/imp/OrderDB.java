@@ -3,10 +3,14 @@ package dao.imp;
 import common.Constants;
 import common.SqlQueries;
 import dao.OrdersDAO;
+import dao.imp.maps.MapCustomer;
+import dao.imp.maps.MapOrder;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
+import model.Customer;
 import model.Order;
 import model.errors.OrderError;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,16 +27,14 @@ public class OrderDB implements OrdersDAO {
     @Override
     public Either<OrderError, List<Order>> getAll() {
         Either<OrderError, List<Order>> result;
-        try (Connection myConnection = db.getConnection();
-             Statement statement = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                     ResultSet.CONCUR_READ_ONLY)) {
-            ResultSet rs = statement.executeQuery(SqlQueries.SELECT_FROM_ORDERS);
-
-            result=Either.right(readRS(rs).get());
-            db.closeConnection(myConnection);
-        } catch (SQLException e) {
-            result=Either.left(new OrderError(Constants.ERROR_WHILE_RETRIEVING_ORDERS));
+        JdbcTemplate jtm = new JdbcTemplate(db.getDataSource());
+        List<Order> l = jtm.query(SqlQueries.SELECT_FROM_ORDERS, new MapOrder());
+        if (l.isEmpty()) {
+            result = Either.left(new OrderError(Constants.ERROR_WHILE_RETRIEVING_ORDERS));
+        } else {
+            result = Either.right(l);
         }
+
         return result;
     }
 
@@ -55,26 +57,6 @@ public class OrderDB implements OrdersDAO {
     }
 
 
-    private Either<OrderError, List<Order>> readRS(ResultSet rs) {
-        try {
-            List<Order> orders = new ArrayList<>();
-            while (rs.next()) {
-                Order order = new Order(
-                        rs.getInt(Constants.ORDER_ID),
-                        rs.getTimestamp(Constants.ORDER_DATE).toLocalDateTime(),
-                        rs.getInt(Constants.CUSTOMER_ID2),
-                        rs.getInt(Constants.TABLE_ID2)
-                );
-
-                orders.add(order);
-
-            }
-
-            return Either.right(orders);
-        } catch (SQLException e) {
-            return Either.left(new OrderError(Constants.ERROR_WHILE_READING_ORDERS));
-        }
-    }
 
 
     public Either<OrderError, Integer> update(Order c) {

@@ -17,6 +17,9 @@ public class MenuItemServiceImpl implements MenuItemService {
         this.dao = dao;
     }
 
+
+
+
     public Either<OrderError, List<MenuItem>> getAll() {
         return dao.getAll();
     }

@@ -58,6 +58,7 @@ public class AddCustomersController extends BaseScreenController {
                 }
         );
         addCustomerViewModel.voidState();
+
     }
 
     @Override

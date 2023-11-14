@@ -17,6 +17,7 @@ public class LoginController extends BaseScreenController {
 
     @Inject
     public LoginController(LoginServices services) {
+
         this.services = services;
     }
     public void doLogin(ActionEvent actionEvent) {

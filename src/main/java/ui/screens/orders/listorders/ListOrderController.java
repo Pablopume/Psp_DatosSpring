@@ -3,6 +3,7 @@ package ui.screens.orders.listorders;
 import common.Constants;
 import jakarta.inject.Inject;
 import jakarta.xml.bind.JAXBException;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -10,12 +11,21 @@ import model.MenuItem;
 import model.Order;
 import model.OrderItem;
 import ui.screens.common.BaseScreenController;
+import ui.screens.principal.PrincipalController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 
 public class ListOrderController extends BaseScreenController {
+
+    
+    ListOrderViewModel listOrderViewModel;
+    @Inject
+    public ListOrderController(ListOrderViewModel listOrderViewModel,PrincipalController principalController) {
+        this.listOrderViewModel = listOrderViewModel;
+    }
+
     @FXML
     public TableView<Order> customersTable;
     @FXML
@@ -37,10 +47,14 @@ public class ListOrderController extends BaseScreenController {
     public TableColumn<OrderItem, String> menuItem;
     public TableColumn<OrderItem, Integer> quantity;
     public Label nameCustomer;
-    @Inject
-    ListOrderViewModel listOrderViewModel;
+    public Label price;
+
+
+
 
     public void initialize() {
+
+
         datePicker.setVisible(false);
         customerTextField.setVisible(false);
         idOrder.setCellValueFactory(new PropertyValueFactory<>(Constants.ID));
@@ -49,8 +63,8 @@ public class ListOrderController extends BaseScreenController {
         tableId.setCellValueFactory(new PropertyValueFactory<>(Constants.TABLE_ID));
         menuItem.setCellValueFactory(new PropertyValueFactory<>("menuItem"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        customersTable.getItems().setAll(listOrderViewModel.getServices().getOrdersByCustomerId(getPrincipalController().getActualUser().getId()));
 
-        filterOptions();
         customerTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue == null || newValue.trim().isEmpty()) {
                         customersTable.getItems().setAll(listOrderViewModel.getServices().getAll().get());
@@ -84,6 +98,7 @@ public class ListOrderController extends BaseScreenController {
         customersTable.setOnMouseClicked(event -> {
             Order selectedOrder = customersTable.getSelectionModel().getSelectedItem();
 
+            price.setText(String.valueOf(listOrderViewModel.getOrderItemService().getTotalPrice(selectedOrder.getId())));
             ordersTable.getItems().setAll(listOrderViewModel.getOrderItemService().getOrdersById(selectedOrder.getId()));
                 nameCustomer.setText(listOrderViewModel.getServicesCustomer().getNameById(selectedOrder.getCustomer_id()));
 

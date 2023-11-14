@@ -1,33 +1,31 @@
 
 y
-java:S1104""WMake custIdField a static final constant or non-public and provide accessors if needed.(èÕ°´ûÿÿÿÿ8‹ìøòº1
+java:S1104""WMake custIdField a static final constant or non-public and provide accessors if needed.(èÕ°´ûÿÿÿÿ8Ş©àÖº1
 s
-java:S1104#"VMake tableFIeld a static final constant or non-public and provide accessors if needed.(Ñ‘¹Ù8‹ìøòº1
+java:S1104#"VMake tableFIeld a static final constant or non-public and provide accessors if needed.(Ñ‘¹Ù8Ş©àÖº1
 w
-java:S1104$"ZMake ordersXMLTable a static final constant or non-public and provide accessors if needed.(àş´8Œìøòº1
+java:S1104$"ZMake ordersXMLTable a static final constant or non-public and provide accessors if needed.(àş´8ß©àÖº1
 v
-java:S1104%"TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ8Œìøòº1
+java:S1104%"TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ8ß©àÖº1
 p
-java:S1104&"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³38Œìøòº1
+java:S1104&"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³38ß©àÖº1
 v
-java:S1104'"YMake quantityItems a static final constant or non-public and provide accessors if needed.(÷öäí8Œìøòº1
+java:S1104'"YMake quantityItems a static final constant or non-public and provide accessors if needed.(÷öäí8ß©àÖº1
 r
-java:S1104("UMake menuItems a static final constant or non-public and provide accessors if needed.(ƒ´ãÄ8Œìøòº1
-d
-java:S6813*"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8²ìøòº1
+java:S1104("UMake menuItems a static final constant or non-public and provide accessors if needed.(ƒ´ãÄ8ß©àÖº1
 T
-java:S1172_"2Remove this unused method parameter "actionEvent".(Ò‹—§ÿÿÿÿÿ8¹ìøòº1
+java:S1172_"2Remove this unused method parameter "actionEvent".(Ò‹—§ÿÿÿÿÿ8ØªàÖº1
 O
-java:S1172n"2Remove this unused method parameter "actionEvent".(‚§Ê‰8¼ìøòº1
+java:S1172n"2Remove this unused method parameter "actionEvent".(‚§Ê‰8àªàÖº1
 O
-java:S1172u"2Remove this unused method parameter "actionEvent".(‹‡Æ„8½ìøòº1
+java:S1172u"2Remove this unused method parameter "actionEvent".(‹‡Æ„8äªàÖº1
 X
-java:S1128";Remove this unused import 'jakarta.xml.bind.JAXBException'.(¬å†À8¾ìøòº1
+java:S1128";Remove this unused import 'jakarta.xml.bind.JAXBException'.(¬å†À8çªàÖº1
 J
-java:S1128"(Remove this unused import 'lombok.Data'.(÷í«ÿÿÿÿÿ8¾ìøòº1
+java:S1128"(Remove this unused import 'lombok.Data'.(÷í«ÿÿÿÿÿ8çªàÖº1
 H
-java:S1128"+Remove this unused import 'model.Customer'.(°¶ãê8¾ìøòº1
+java:S1128"+Remove this unused import 'model.Customer'.(°¶ãê8çªàÖº1
 H
-java:S1128"+Remove this unused import 'model.MenuItem'.(¼Ò¿à8¾ìøòº1
+java:S1128"+Remove this unused import 'model.MenuItem'.(¼Ò¿à8èªàÖº1
 R
-java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8¿ìøòº1
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8èªàÖº1

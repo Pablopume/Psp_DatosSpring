@@ -42,8 +42,14 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
-    public Integer getTotalPrice(List<OrderItem> orderItems) {
-        return null;
+    public double getTotalPrice(int id) {
+        List<OrderItem> orderItems = getOrdersById(id);
+        double totalPrice = 0;
+        for(OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getMenuItem().getPrice()*orderItem.getQuantity();
+
+        }
+        return totalPrice;
     }
 
     public List<OrderItem> getOrdersById(int id) {
