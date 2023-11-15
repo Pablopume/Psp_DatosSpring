@@ -40,14 +40,10 @@ public class ListOrderViewModel {
     }
 
     public void loadState() {
-        List<Order> listOrd = services.getAll().get();
-        if (listOrd.isEmpty()) {
-            state.set(new ListOrderState(null, Constants.THERE_ARE_NO_ORDERS));
+        List<Order> listOrd = new ArrayList<>();
 
-
-        } else {
             state.set(new ListOrderState(listOrd, null));
         }
-    }
+
 
 }
