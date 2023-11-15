@@ -63,7 +63,7 @@ public class ListOrderController extends BaseScreenController {
         tableId.setCellValueFactory(new PropertyValueFactory<>(Constants.TABLE_ID));
         menuItem.setCellValueFactory(new PropertyValueFactory<>("menuItem"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        customersTable.getItems().setAll(listOrderViewModel.getServices().getOrdersByCustomerId(getPrincipalController().getActualUser().getId()));
+
 
         customerTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue == null || newValue.trim().isEmpty()) {
@@ -125,6 +125,9 @@ public class ListOrderController extends BaseScreenController {
     @Override
     public void principalLoaded() {
         listOrderViewModel.loadState();
+        if(getPrincipalController().getActualUser().getId()!=-1) {
+            customersTable.getItems().setAll(listOrderViewModel.getServices().getOrdersByCustomerId(getPrincipalController().getActualUser().getId()));
+        }
     }
 
 

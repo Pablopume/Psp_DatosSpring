@@ -1,9 +1,16 @@
 
 M
-java:S2695T"+This "PreparedStatement" has no parameters.(Ùæıªøÿÿÿÿ8¯àÖº1
+java:S2695B"+This "PreparedStatement" has no parameters.(Ùæıªøÿÿÿÿ8¯àÖº1
 H
-java:S2695U"+This "PreparedStatement" has no parameters.(ïÌĞÚ8¯àÖº1
+java:S2695C"+This "PreparedStatement" has no parameters.(ïÌĞÚ8¯àÖº1
 M
-java:S2695V"+This "PreparedStatement" has no parameters.(ĞŠŞ›üÿÿÿÿ8¯àÖº1
+java:S2695D"+This "PreparedStatement" has no parameters.(ĞŠŞ›üÿÿÿÿ8¯àÖº1
 H
-java:S2695W"+This "PreparedStatement" has no parameters.(ùó°´8Ÿ¯àÖº1
+java:S2695E"+This "PreparedStatement" has no parameters.(ùó°´8Ÿ¯àÖº1
+W
+java:S1128"5Remove this unused import 'dao.imp.maps.MapCustomer'.(™ÙÁşÿÿÿÿ8–Ø”½1
+H
+java:S1128
+"+Remove this unused import 'model.Customer'.(°¶ãê8–Ø”½1
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8–Ø”½1

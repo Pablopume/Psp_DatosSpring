@@ -3,12 +3,14 @@ package dao.imp;
 import common.Constants;
 import common.SqlQueries;
 import dao.OrderItemDAO;
+import dao.imp.maps.MapOrderItem;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import model.MenuItem;
 import model.Order;
 import model.OrderItem;
 import model.errors.OrderError;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 
 import java.sql.Connection;
@@ -29,22 +31,13 @@ public class OrderItemDaoJDBC implements OrderItemDAO {
 
     @Override
     public Either<OrderError, List<OrderItem>> getAll() {
-        Either<OrderError, List<OrderItem>> result = null;
-        try (Connection con = db.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement(SqlQueries.SELECT_FROM_ORDER_ITEMS)) {
-            ResultSet rs = preparedStatement.executeQuery();
-            List<OrderItem> orderitems = readRS(rs);
-            if (orderitems.isEmpty()) {
-                result = Either.left(new OrderError(Constants.THEARE_ARE_NO_ORDER_ITEMS_IN_THIS_ORDER));
-            } else {
-                result = Either.right(orderitems);
-            }
-            db.closeConnection(con);
-        } catch (SQLException ex) {
-            result = Either.left(new OrderError(Constants.ERROR_CONNECTING_TO_DATABASE));
-        }
-        return result;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(db.getDataSource());
+        String query = "SELECT oi.order_item_id, oi.order_id, oi.menu_item_id, oi.quantity, mi.name, mi.description, mi.price FROM order_items oi INNER JOIN menu_items mi ON oi.menu_item_id = mi.menu_item_id";
+        List<OrderItem> orderItems = jdbcTemplate.query(query, new MapOrderItem());
+        return Either.right(orderItems);
+
     }
+
     @Override
     public Either<OrderError, Integer> save(List<OrderItem> c) {
         Either<OrderError, Integer> result;

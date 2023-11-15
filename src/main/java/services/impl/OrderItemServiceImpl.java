@@ -49,7 +49,8 @@ public class OrderItemServiceImpl implements OrderItemService {
             totalPrice += orderItem.getMenuItem().getPrice()*orderItem.getQuantity();
 
         }
-        return totalPrice;
+
+        return Math.round(totalPrice*100.0)/100.0;
     }
 
     public List<OrderItem> getOrdersById(int id) {

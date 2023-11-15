@@ -54,10 +54,12 @@ module javafx {
     opens ui.screens.customers.deletecustomer;
     opens ui.screens.customers.showcustomers;
     opens ui.screens.orders.deleteorders;
+    exports dao.deprecated;
     exports dao;
     exports model.errors;
     exports services;
     opens dao.imp;
     exports dao.imp.maps;
     opens dao.imp.maps;
+    exports model.xml;
 }

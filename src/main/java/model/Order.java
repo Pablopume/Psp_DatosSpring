@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @AllArgsConstructor
 @Data
@@ -14,8 +15,16 @@ public class Order {
     private LocalDateTime date;
     private int customer_id;
     private int table_id;
+    private List<OrderItem> orderItemList;
 
     public Order(LocalDateTime date, int customer_id, int table_id) {
+        this.date = date;
+        this.customer_id = customer_id;
+        this.table_id = table_id;
+    }
+
+    public Order(int id, LocalDateTime date, int customer_id, int table_id) {
+        this.id = id;
         this.date = date;
         this.customer_id = customer_id;
         this.table_id = table_id;

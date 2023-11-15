@@ -57,19 +57,24 @@ public class AddOrderController extends BaseScreenController {
     }
 
     public void addOrder() {
-        try {
+
             int selectedCustomerId = Integer.parseInt(idCustomer.getValue());
             int selectedTableId = Integer.parseInt(table_id.getValue());
-            addOrderViewModel.getServices().createOrder(new Order(LocalDateTime.now(),selectedCustomerId,selectedTableId));
+     Order order=       addOrderViewModel.getServices().createOrder(new Order(LocalDateTime.now(),selectedCustomerId,selectedTableId)).get();
+
+            List<Order> orders = addOrderViewModel.getServices().getAll().get();
+            if((orders.get(orders.size()-1).getDate().getSecond()==order.getDate().getSecond()||orders.get(orders.size()-1).getDate().getSecond()==order.getDate().getSecond()+1 ) && orders.get(orders.size()-1).getDate().getMinute()==order.getDate().getMinute() && orders.get(orders.size()-1).getDate().getHour()==order.getDate().getHour() && orders.get(orders.size()-1).getDate().getDayOfMonth()==order.getDate().getDayOfMonth() && orders.get(orders.size()-1).getDate().getMonth()==order.getDate().getMonth() && orders.get(orders.size()-1).getDate().getYear()==order.getDate().getYear()) {
+            for (OrderItem orderItem : ordersXMLTable.getItems()) {
+                orderItem.setIdOrder(orders.get(orders.size() - 1).getId());
+            }
+        }
             addOrderViewModel.getOrderItemService().save(ordersXMLTable.getItems());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle(Constants.ORDER_ADDED);
             alert.setHeaderText(null);
             alert.setContentText(Constants.THE_ORDER_HAS_BEEN_ADDED);
             alert.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void addItem() {
