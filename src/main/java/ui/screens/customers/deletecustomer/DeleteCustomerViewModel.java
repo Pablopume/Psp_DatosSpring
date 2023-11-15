@@ -8,17 +8,20 @@ import javafx.beans.property.SimpleObjectProperty;
 import lombok.Data;
 import model.Customer;
 import services.CustomerServices;
+import services.OrderItemService;
 import services.OrderServices;
 
 import java.util.ArrayList;
 import java.util.List;
 @Data
 public class DeleteCustomerViewModel {
+    private final OrderItemService orderItemService;
     private final OrderServices servicesOrder;
     private final CustomerServices services;
     private final ObjectProperty<DeleteCustomerState> state;
     @Inject
-    public DeleteCustomerViewModel(OrderServices servicesOrder, CustomerServices services) {
+    public DeleteCustomerViewModel(OrderItemService orderItemService, OrderServices servicesOrder, CustomerServices services) {
+        this.orderItemService = orderItemService;
         this.servicesOrder = servicesOrder;
         this.services = services;
 

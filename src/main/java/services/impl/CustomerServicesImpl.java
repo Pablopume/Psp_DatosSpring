@@ -1,11 +1,15 @@
 package services.impl;
 
 import dao.CustomerDAO;
+import dao.OrdersDAO;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import model.Customer;
+import model.Order;
 import model.errors.CustomerError;
+import model.errors.OrderError;
 import services.CustomerServices;
 
 import java.util.Comparator;
@@ -14,10 +18,12 @@ import java.util.List;
 @Singleton
 public class CustomerServicesImpl implements CustomerServices {
     private final CustomerDAO customerDAO;
+    private final OrdersDAO ordersDAO;
 
     @Inject
-    public CustomerServicesImpl(CustomerDAO customerDAO) {
+    public CustomerServicesImpl(CustomerDAO customerDAO,@Named("OrderXMLImpl") OrdersDAO ordersDAO) {
         this.customerDAO = customerDAO;
+        this.ordersDAO = ordersDAO;
     }
 
     @Override
@@ -42,6 +48,12 @@ public class CustomerServicesImpl implements CustomerServices {
         customers.sort(Comparator.comparing(Customer::getId));
         return customers.get(customers.size() - 1).getId() + 1;
     }
+
+    @Override
+    public Either<OrderError, Order> save(Order order) {
+        return ordersDAO.save(order);
+    }
+
 
     public String getNameById(int id){
         List<Customer> customers = customerDAO.getAll().get();

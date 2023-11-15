@@ -3,6 +3,7 @@ package services.impl;
 import dao.OrdersDAO;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import model.Order;
 import model.errors.OrderError;
 import services.OrderServices;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class OrderServicesImpl implements OrderServices {
     private OrdersDAO ordersDAO;
     @Inject
-    public OrderServicesImpl(OrdersDAO ordersDAO) {
+    public OrderServicesImpl(@Named("OrderDB") OrdersDAO ordersDAO) {
         this.ordersDAO = ordersDAO;
     }
     public Either<OrderError, List<Order>> getAll() {
@@ -58,6 +59,7 @@ public class OrderServicesImpl implements OrderServices {
                     .toList();
         }
     }
+
 
     public int getLastId() {
         int number=0;

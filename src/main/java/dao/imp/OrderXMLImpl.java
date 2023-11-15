@@ -3,6 +3,7 @@ package dao.imp;
 import common.Constants;
 import dao.OrdersDAO;
 import io.vavr.control.Either;
+import jakarta.inject.Named;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -19,7 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+@Named("OrderXMLImpl")
 public class OrderXMLImpl implements OrdersDAO {
     @Override
     public Either<OrderError, List<Order>> getAll() {

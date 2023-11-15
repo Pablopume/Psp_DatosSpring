@@ -9,11 +9,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
 import model.Order;
+import model.OrderItem;
 import model.errors.CustomerError;
 import ui.screens.common.BaseScreenController;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public class DeleteCustomersController extends BaseScreenController {
@@ -122,6 +124,12 @@ public class DeleteCustomersController extends BaseScreenController {
                                     Optional<ButtonType> res2 = alert2.showAndWait();
                                     res2.ifPresent(buttonType2 -> {
                                         if (buttonType2 == ButtonType.YES) {
+                                            deleteCustomerViewModel.getServicesOrder().getOrdersByCustomerId(selectedCustomer.getId()).forEach(order -> {
+                                                List<OrderItem> orderItems = deleteCustomerViewModel.getOrderItemService().getOrdersById(order.getId());
+                                                order.setOrderItemList(orderItems);
+                                                deleteCustomerViewModel.getServices().save(order);
+                                            });
+
                                             deleteCustomerViewModel.getServices().delete(selectedCustomer, true).peek(result -> {
                                                         if (result == 0) {
                                                             Alert a = new Alert(Alert.AlertType.INFORMATION);

@@ -7,7 +7,9 @@ import dao.imp.maps.MapCustomer;
 import jakarta.inject.Inject;
 import lombok.extern.log4j.Log4j2;
 import model.Customer;
+import model.Order;
 import model.errors.CustomerError;
+import model.errors.OrderError;
 import org.springframework.dao.DataAccessException;
 import io.vavr.control.Either;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -74,6 +76,11 @@ public class CustomerDB implements CustomerDAO {
             result = deleteRelationsWithCustomers(customer);
         }
         return result;
+    }
+
+    @Override
+    public Either<OrderError, Order> save(Order order) {
+        return null;
     }
 
 

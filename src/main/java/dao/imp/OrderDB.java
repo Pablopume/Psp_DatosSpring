@@ -7,6 +7,7 @@ import dao.imp.maps.MapCustomer;
 import dao.imp.maps.MapOrder;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import model.Customer;
 import model.Order;
 import model.errors.OrderError;
@@ -15,7 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Named("OrderDB")
 public class OrderDB implements OrdersDAO {
     private DBConnectionPool db;
 
@@ -36,6 +37,11 @@ public class OrderDB implements OrdersDAO {
         }
 
         return result;
+    }
+
+    @Override
+    public Either<OrderError, List<Order>> getAll(int id) {
+        return null;
     }
 
     public Either<OrderError, Integer> delete(Order c) {
@@ -78,6 +84,11 @@ public class OrderDB implements OrdersDAO {
             result = Either.left(new OrderError(Constants.ERROR_CONNECTING_TO_DATABASE));
         }
         return result;
+    }
+
+    @Override
+    public Either<OrderError, List<Order>> save(List<Order> orders) {
+        return null;
     }
 
     @Override
