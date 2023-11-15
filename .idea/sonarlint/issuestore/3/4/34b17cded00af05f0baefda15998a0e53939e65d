@@ -1,18 +1,18 @@
 
 v
-java:S1104$"TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ8Ôá¸“½1
+java:S1104$"TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ8ŸİÁ’¹1
 w
-java:S1104%"ZMake ordersXMLTable a static final constant or non-public and provide accessors if needed.(àş´8Ôá¸“½1
+java:S1104%"ZMake ordersXMLTable a static final constant or non-public and provide accessors if needed.(àş´8ŸİÁ’¹1
 p
-java:S1104&"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³38Õá¸“½1
+java:S1104&"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³38ŸİÁ’¹1
 r
-java:S1104'"UMake menuItems a static final constant or non-public and provide accessors if needed.(ƒ´ãÄ8Õá¸“½1
+java:S1104'"UMake menuItems a static final constant or non-public and provide accessors if needed.(ƒ´ãÄ8ŸİÁ’¹1
 v
-java:S1104("YMake quantityItems a static final constant or non-public and provide accessors if needed.(÷öäí8Õá¸“½1
-o	java:S116#"SRename this field "table_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ïˆã8‹â¸“½1
-d
-java:S6813+"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8‹â¸“½1
+java:S1104("YMake quantityItems a static final constant or non-public and provide accessors if needed.(÷öäí8ŸİÁ’¹1
+o	java:S116#"SRename this field "table_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ïˆã8¯İÁ’¹1
 W
-java:S1128"5Remove this unused import 'javafx.event.ActionEvent'.(î•¯¼ıÿÿÿÿ8—â¸“½1
+java:S1128"5Remove this unused import 'javafx.event.ActionEvent'.(î•¯¼ıÿÿÿÿ8İüõº1
 \
-java:S1128"?Remove this unused import 'java.time.format.DateTimeFormatter'.(‰÷÷ª8˜â¸“½1
+java:S1128"?Remove this unused import 'java.time.format.DateTimeFormatter'.(‰÷÷ª8´İÁ’¹1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8´İÁ’¹1

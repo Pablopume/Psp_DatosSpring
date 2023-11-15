@@ -25,7 +25,6 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
 
-
     @Override
     public Either<OrderError, Integer> save(List<OrderItem> c) {
         return dao.save(c);
@@ -45,12 +44,12 @@ public class OrderItemServiceImpl implements OrderItemService {
     public double getTotalPrice(int id) {
         List<OrderItem> orderItems = getOrdersById(id);
         double totalPrice = 0;
-        for(OrderItem orderItem : orderItems) {
-            totalPrice += orderItem.getMenuItem().getPrice()*orderItem.getQuantity();
+        for (OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getMenuItem().getPrice() * orderItem.getQuantity();
 
         }
 
-        return Math.round(totalPrice*100.0)/100.0;
+        return Math.round(totalPrice * 100.0) / 100.0;
     }
 
     public List<OrderItem> getOrdersById(int id) {
@@ -66,7 +65,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
 
-    public int getAutoId(){
+    public int getAutoId() {
         Either<OrderError, List<OrderItem>> result = dao.getAll();
         if (result.isLeft()) {
             return 0;

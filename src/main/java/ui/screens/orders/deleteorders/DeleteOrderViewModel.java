@@ -9,6 +9,7 @@ import lombok.Data;
 import model.Order;
 import services.OrderItemService;
 import services.OrderServices;
+import ui.screens.orders.listorders.ListOrderState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +35,15 @@ public class DeleteOrderViewModel {
     public ReadOnlyObjectProperty<DeleteOrderState> getState(){return state;}
 
     public void loadState() {
-        List<Order> listOrd = services.getAll().get();
-        if (listOrd.isEmpty()) {
-            state.set(new DeleteOrderState(null, Constants.THERE_ARE_NO_ORDERS));
+        List<Order> listOrd = new ArrayList<>();
+            if (!services.getAll().isEmpty()) {
+                listOrd = services.getAll().get();
+            }
+            state.set(new DeleteOrderState(listOrd, null));
 
 
-        }else {
-            state.set(new DeleteOrderState(listOrd,null));
+
+
         }
-    }
+
 }

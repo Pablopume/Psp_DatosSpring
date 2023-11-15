@@ -12,5 +12,5 @@ public interface OrdersDAO {
     Either<OrderError, Integer> delete(Order order);
     Either<OrderError, Order> save(Order order);
     Either<OrderError, Integer> update(Order c);
-    Either<OrderError, List<Order>> save(List<Order> orders);
+
 }

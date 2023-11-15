@@ -12,10 +12,15 @@ import model.Customer;
 import model.Order;
 import model.errors.OrderError;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Named("OrderDB")
 public class OrderDB implements OrdersDAO {
     private DBConnectionPool db;
@@ -46,23 +51,38 @@ public class OrderDB implements OrdersDAO {
 
     public Either<OrderError, Integer> delete(Order c) {
         Either<OrderError, Integer> result;
-        try (Connection myConnection = db.getConnection();
-             PreparedStatement preparedStatement = myConnection.prepareStatement(SqlQueries.DELETE_FROM_ORDERS_WHERE_ORDER_ID);
-             PreparedStatement preparedStatementItems = myConnection.prepareStatement(SqlQueries.DELETE_FROM_ORDER_ITEMS_WHERE_ORDER_ID)) {
-            preparedStatement.setInt(1, c.getId());
-            preparedStatementItems.setInt(1, c.getId());
-            preparedStatementItems.executeUpdate();
-            preparedStatement.executeUpdate();
-            result = Either.right(1);
-            db.closeConnection(myConnection);
+        Connection myConnection = null;
+        try {
+            myConnection = db.getConnection();
+            myConnection.setAutoCommit(false);
+
+            try (PreparedStatement preparedStatement = myConnection.prepareStatement(SqlQueries.DELETE_FROM_ORDERS_WHERE_ORDER_ID);
+                 PreparedStatement preparedStatementItems = myConnection.prepareStatement(SqlQueries.DELETE_FROM_ORDER_ITEMS_WHERE_ORDER_ID)) {
+                preparedStatement.setInt(1, c.getId());
+                preparedStatementItems.setInt(1, c.getId());
+                preparedStatementItems.executeUpdate();
+                preparedStatement.executeUpdate();
+                result = Either.right(1);
+            }
+
+            myConnection.commit();
         } catch (SQLException ex) {
+
+            try {
+                myConnection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
             result = Either.left(new OrderError(Constants.ERROR_CONNECTING_TO_DATABASE));
+        } finally {
+            if (myConnection != null) {
+                db.closeConnection(myConnection);
+            }
         }
 
         return result;
     }
-
-
 
 
     public Either<OrderError, Integer> update(Order c) {
@@ -86,16 +106,12 @@ public class OrderDB implements OrdersDAO {
         return result;
     }
 
-    @Override
-    public Either<OrderError, List<Order>> save(List<Order> orders) {
-        return null;
-    }
 
     @Override
     public Either<OrderError, Order> save(Order c) {
         Either<OrderError, Order> result = null;
-        try(Connection con = db.getConnection();
-            PreparedStatement preparedStatement = con.prepareStatement(SqlQueries.INSERT_INTO_ORDERS_ORDER_DATE_CUSTOMER_ID_TABLE_ID_VALUES, Statement.RETURN_GENERATED_KEYS))  {
+        try (Connection con = db.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(SqlQueries.INSERT_INTO_ORDERS_ORDER_DATE_CUSTOMER_ID_TABLE_ID_VALUES, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setTimestamp(1, Timestamp.valueOf(c.getDate()));
             preparedStatement.setInt(2, c.getCustomer_id());
             preparedStatement.setInt(3, c.getTable_id());

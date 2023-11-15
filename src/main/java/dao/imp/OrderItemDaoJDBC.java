@@ -32,7 +32,7 @@ public class OrderItemDaoJDBC implements OrderItemDAO {
     @Override
     public Either<OrderError, List<OrderItem>> getAll() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(db.getDataSource());
-        String query = "SELECT oi.order_item_id, oi.order_id, oi.menu_item_id, oi.quantity, mi.name, mi.description, mi.price FROM order_items oi INNER JOIN menu_items mi ON oi.menu_item_id = mi.menu_item_id";
+        String query = SqlQueries.QUERY;
         List<OrderItem> orderItems = jdbcTemplate.query(query, new MapOrderItem());
         return Either.right(orderItems);
 

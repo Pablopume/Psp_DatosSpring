@@ -31,6 +31,9 @@ public class ShowCustomersController extends BaseScreenController {
 
 
     public void initialize() {
+        if (!custViewModel.getServices().getAll().isEmpty()) {
+            customersTable.getItems().setAll(custViewModel.getServices().getAll().get());
+        }
         idCustomerColumn.setCellValueFactory(new PropertyValueFactory<>(Constants.ID));
         nameCustomerColumn.setCellValueFactory(new PropertyValueFactory<>(Constants.FIRST_NAME));
         surnameCustomerColumn.setCellValueFactory(new PropertyValueFactory<>(Constants.LAST_NAME));

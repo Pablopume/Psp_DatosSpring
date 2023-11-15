@@ -37,12 +37,13 @@ public class EditOrderViewModel {
     public ReadOnlyObjectProperty<EditOrderState> getState(){return state;}
 
     public void loadState() {
-        List<Order> listOrd = services.getAll().get();
-        if (listOrd.isEmpty()) {
-            state.set(new EditOrderState(null, Constants.THERE_ARE_NO_ORDERS));
+        List<Order> listOrd = new ArrayList<>();
+        if (services.getAll().isEmpty()) {
+            state.set(new EditOrderState(listOrd, Constants.THERE_ARE_NO_ORDERS));
 
 
         }else {
+            listOrd = services.getAll().get();
             state.set(new EditOrderState(listOrd,null));
         }
     }

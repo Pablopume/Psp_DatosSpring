@@ -22,7 +22,7 @@ module javafx {
     requires jakarta.annotation;
     requires spring.jdbc;
     requires spring.tx;
-
+    opens model.xml to jakarta.xml.bind;
     exports ui.screens.orders.deleteorders;
     exports services.impl;
     exports dao.imp;

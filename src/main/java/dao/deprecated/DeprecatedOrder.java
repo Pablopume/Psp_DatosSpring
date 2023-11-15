@@ -1,5 +1,7 @@
 package dao.deprecated;
 
+import common.Constants;
+import common.SqlQueries;
 import dao.imp.DBConnectionPool;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
@@ -26,10 +28,10 @@ public class DeprecatedOrder {
         try (Connection myConnection = db.getConnection();
              Statement statement = myConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)) {
-            ResultSet rs = statement.executeQuery("select * from orders");
+            ResultSet rs = statement.executeQuery(SqlQueries.SELECT_FROM_ORDERS);
             return Either.right(readRS(rs).get());
         } catch (SQLException e) {
-            return Either.left(new OrderError("Error while reading orders"));
+            return Either.left(new OrderError(Constants.ERROR_WHILE_RETRIEVING_ORDERS));
         }
     }
 
@@ -39,10 +41,10 @@ public class DeprecatedOrder {
             List<Order> orders = new ArrayList<>();
             while (rs.next()) {
                 Order order = new Order(
-                        rs.getInt("order_id"),
-                        rs.getTimestamp("order_date").toLocalDateTime(),
-                        rs.getInt("customer_id"),
-                        rs.getInt("table_id")
+                        rs.getInt(Constants.ORDER_ID),
+                        rs.getTimestamp(Constants.ORDER_DATE).toLocalDateTime(),
+                        rs.getInt(Constants.CUSTOMER_ID),
+                        rs.getInt(Constants.TABLE_ID)
                 );
 
                 orders.add(order);
@@ -50,7 +52,7 @@ public class DeprecatedOrder {
             }
             return Either.right(orders);
         } catch (SQLException e) {
-            return Either.left(new OrderError("Error while reading orders"));
+            return Either.left(new OrderError(Constants.ERROR_WHILE_RETRIEVING_ORDERS));
         }
 
     }

@@ -3,6 +3,8 @@ package ui.screens.orders.listorders;
 import common.Constants;
 import jakarta.inject.Inject;
 import jakarta.xml.bind.JAXBException;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,11 +17,13 @@ import ui.screens.principal.PrincipalController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class ListOrderController extends BaseScreenController {
 
-    
+
+    public TableColumn<OrderItem, Double> priceT;
     ListOrderViewModel listOrderViewModel;
     @Inject
     public ListOrderController(ListOrderViewModel listOrderViewModel,PrincipalController principalController) {
@@ -64,6 +68,7 @@ public class ListOrderController extends BaseScreenController {
         menuItem.setCellValueFactory(new PropertyValueFactory<>("menuItem"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
+        filterOptions();
 
         customerTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue == null || newValue.trim().isEmpty()) {
@@ -99,13 +104,18 @@ public class ListOrderController extends BaseScreenController {
             Order selectedOrder = customersTable.getSelectionModel().getSelectedItem();
 
             price.setText(String.valueOf(listOrderViewModel.getOrderItemService().getTotalPrice(selectedOrder.getId())));
-            ordersTable.getItems().setAll(listOrderViewModel.getOrderItemService().getOrdersById(selectedOrder.getId()));
-                nameCustomer.setText(listOrderViewModel.getServicesCustomer().getNameById(selectedOrder.getCustomer_id()));
+           ordersTable.getItems().setAll(listOrderViewModel.getOrderItemService().getOrdersById(selectedOrder.getId()));
 
-            listOrderViewModel.voidState();
+            priceT.setCellValueFactory(cellData -> {
+                OrderItem orderItem = cellData.getValue();
+                MenuItem menuItem = orderItem.getMenuItem();
+                return new SimpleDoubleProperty(menuItem.getPrice()*orderItem.getQuantity()).asObject();
+            });
 
+            nameCustomer.setText(listOrderViewModel.getServicesCustomer().getNameById(selectedOrder.getCustomer_id()));
 
         });
+        listOrderViewModel.voidState();
     }
 
     private void filterOptions() {
@@ -126,7 +136,14 @@ public class ListOrderController extends BaseScreenController {
     public void principalLoaded() {
         listOrderViewModel.loadState();
         if(getPrincipalController().getActualUser().getId()!=-1) {
-            customersTable.getItems().setAll(listOrderViewModel.getServices().getOrdersByCustomerId(getPrincipalController().getActualUser().getId()));
+            if(!listOrderViewModel.getServices().getOrdersByCustomerId(getPrincipalController().getActualUser().getId()).isEmpty()){
+                customersTable.getItems().setAll(listOrderViewModel.getServices().getOrdersByCustomerId(getPrincipalController().getActualUser().getId()));
+            }
+
+        }else {
+            if (!listOrderViewModel.getServices().getAll().isEmpty()) {
+                customersTable.getItems().setAll(listOrderViewModel.getServices().getAll().get());
+            }
         }
     }
 

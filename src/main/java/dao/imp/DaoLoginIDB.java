@@ -1,5 +1,6 @@
 package dao.imp;
 
+import common.Constants;
 import common.SqlQueries;
 import dao.LoginDAO;
 import io.vavr.control.Either;
@@ -14,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DaoLoginIDB implements LoginDAO {
+    public static final String USER_NAME = "user_name";
+    public static final String PASSWORD = "password";
     private DBConnectionPool db;
+
     @Inject
     public DaoLoginIDB(DBConnectionPool db) {
         this.db = db;
@@ -29,9 +33,9 @@ public class DaoLoginIDB implements LoginDAO {
             ResultSet rs = statement.executeQuery(SqlQueries.SELECT_FROM_CREDENTIALS);
             List<Credentials> credentialsList = new ArrayList<>();
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String user = rs.getString("user_name");
-                String password = rs.getString("password");
+                int id = rs.getInt(Constants.ID);
+                String user = rs.getString(USER_NAME);
+                String password = rs.getString(PASSWORD);
                 Credentials c = new Credentials(id, user, password);
                 credentialsList.add(c);
             }

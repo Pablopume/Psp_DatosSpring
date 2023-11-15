@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Credentials;
 import model.Customer;
 import ui.screens.common.BaseScreenController;
 
@@ -21,6 +22,9 @@ public class AddCustomersController extends BaseScreenController {
     public TextField surnameField;
     public TextField mailField;
     public DatePicker dobField;
+
+    public PasswordField password;
+    public TextField userName;
     @FXML
     private TableColumn<Customer, Integer> idCustomerColumn;
     @FXML
@@ -68,18 +72,32 @@ public class AddCustomersController extends BaseScreenController {
 
 
     public void addClient(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (nameField.getText().isEmpty() || surnameField.getText().isEmpty() || phoneField.getText().isEmpty() || mailField.getText().isEmpty() || dobField.getValue() == null) {
             getPrincipalController().sacarAlertError("Please fill all the fields");
 
         } else {
 
-            addCustomerViewModel.getServices().add(new Customer(addCustomerViewModel.getServices().newId(),nameField.getText(),surnameField.getText(),mailField.getText(),phoneField.getText(),dobField.getValue()));
-            customersTable.getItems().setAll(addCustomerViewModel.getServices().getAll().get());
-            nameField.clear();
-            surnameField.clear();
-            phoneField.clear();
-            mailField.clear();
-            dobField.setValue(null);
+            if (addCustomerViewModel.getServices().add(new Customer(0,nameField.getText(),surnameField.getText(),mailField.getText(),phoneField.getText(),dobField.getValue(),new Credentials(0,userName.getText(),password.getText()))).isRight()){
+
+                alert.setTitle("Customer added");
+                alert.setHeaderText(null);
+                alert.setContentText("The customer has been added");
+                alert.showAndWait();
+                customersTable.getItems().setAll(addCustomerViewModel.getServices().getAll().get());
+                userName.clear();
+                password.clear();
+                nameField.clear();
+                surnameField.clear();
+                phoneField.clear();
+                mailField.clear();
+                dobField.setValue(null);
+            }else {
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("The username already exists");
+                alert.showAndWait();
+            }
         }
     }
 }

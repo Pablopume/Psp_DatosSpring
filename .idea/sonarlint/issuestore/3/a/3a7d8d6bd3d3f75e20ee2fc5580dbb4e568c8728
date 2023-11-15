@@ -1,22 +1,22 @@
 
 t
-java:S1104."WMake ordersTable a static final constant or non-public and provide accessors if needed.(ù±8²à×“½1
+java:S1104."WMake ordersTable a static final constant or non-public and provide accessors if needed.(ù±8ºòº½1
 v
-java:S1104/"TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ8²à×“½1
+java:S1104/"TMake menuItem a static final constant or non-public and provide accessors if needed.(äë¼Úøÿÿÿÿ8»òº½1
 p
-java:S11040"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³38²à×“½1
+java:S11040"TMake quantity a static final constant or non-public and provide accessors if needed.(ë˜³38»òº½1
 u
-java:S11041"XMake nameCustomer a static final constant or non-public and provide accessors if needed.(˜Œºï8²à×“½1
+java:S11041"XMake nameCustomer a static final constant or non-public and provide accessors if needed.(˜Œºï8»òº½1
 m
-java:S11042"QMake price a static final constant or non-public and provide accessors if needed.(¿æ‡'8²à×“½1
+java:S11042"QMake price a static final constant or non-public and provide accessors if needed.(¿æ‡'8»òº½1
 X
-java:S1128";Remove this unused import 'jakarta.xml.bind.JAXBException'.(¬å†À8û¸Ù“½1
+java:S1128";Remove this unused import 'jakarta.xml.bind.JAXBException'.(¬å†À8Óòº½1
 `
-java:S1128">Remove this unused import 'javafx.collections.ObservableList'.(ÄÜ€éüÿÿÿÿ8û¸Ù“½1
+java:S1128">Remove this unused import 'javafx.collections.ObservableList'.(ÄÜ€éüÿÿÿÿ8Óòº½1
 H
 java:S1128
-"+Remove this unused import 'model.MenuItem'.(¼Ò¿à8û¸Ù“½1
+"+Remove this unused import 'model.MenuItem'.(¼Ò¿à8Óòº½1
 R
-java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8û¸Ù“½1
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8Óòº½1
 T
-java:S1144o"2Remove this unused private "filterOptions" method.(ª¶íùÿÿÿÿ8Óà×“½1
+java:S1144o"2Remove this unused private "filterOptions" method.(ª¶íùÿÿÿÿ8Óòº½1

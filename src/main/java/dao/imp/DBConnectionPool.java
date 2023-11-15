@@ -53,7 +53,7 @@ public class DBConnectionPool {
     }
 
     public Connection getConnection() {
-        Connection con=null;
+        Connection con = null;
         try {
             con = hikariDataSource.getConnection();
         } catch (SQLException e) {
@@ -70,6 +70,7 @@ public class DBConnectionPool {
             e.printStackTrace();
         }
     }
+
     @PreDestroy
     public void closePool() {
         ((HikariDataSource) hikariDataSource).close();

@@ -10,10 +10,16 @@ import java.util.List;
 
 public interface CustomerServices {
     Either<CustomerError, List<Customer>> getAll();
+
     Either<CustomerError, List<Customer>> add(Customer customer);
+
     Either<CustomerError, List<Customer>> update(Customer customer);
+
     Either<CustomerError, Integer> delete(Customer customer, boolean deleteOrders);
-    int newId();
+
+
+
     Either<OrderError, Order> save(Order order);
+
     String getNameById(int id);
 }

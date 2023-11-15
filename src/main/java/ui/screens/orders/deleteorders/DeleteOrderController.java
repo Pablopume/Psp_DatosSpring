@@ -69,6 +69,9 @@ public class DeleteOrderController extends BaseScreenController {
     @Override
     public void principalLoaded() {
         deleteOrderViewModel.loadState();
+        if(getPrincipalController().getActualUser().getId()!=-1) {
+            ordersTable.getItems().setAll(deleteOrderViewModel.getServices().getOrdersByCustomerId(getPrincipalController().getActualUser().getId()));
+        }
     }
 
     public void deleteOrder(ActionEvent actionEvent) {
@@ -92,4 +95,6 @@ public class DeleteOrderController extends BaseScreenController {
             successAlert.showAndWait();
         }
     }
+
+
 }

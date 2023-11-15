@@ -38,10 +38,11 @@ public class DeleteCustomerViewModel {
     }
 
     public void loadState() {
-        List<Customer> listCust = services.getAll().get();
-        if (listCust.isEmpty()) {
-            state.set(new DeleteCustomerState(null, Constants.THERE_ARE_NO_CUSTOMERS2));
+        List<Customer> listCust =new ArrayList<>();
+        if (services.getAll().isEmpty()) {
+            state.set(new DeleteCustomerState(listCust, Constants.THERE_ARE_NO_CUSTOMERS2));
         } else {
+            listCust = services.getAll().get();
             state.set(new DeleteCustomerState(listCust, null));
         }
     }

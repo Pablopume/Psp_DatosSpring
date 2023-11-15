@@ -21,7 +21,7 @@ public class CustomerServicesImpl implements CustomerServices {
     private final OrdersDAO ordersDAO;
 
     @Inject
-    public CustomerServicesImpl(CustomerDAO customerDAO,@Named("OrderXMLImpl") OrdersDAO ordersDAO) {
+    public CustomerServicesImpl(CustomerDAO customerDAO, @Named("OrderXMLImpl") OrdersDAO ordersDAO) {
         this.customerDAO = customerDAO;
         this.ordersDAO = ordersDAO;
     }
@@ -30,10 +30,12 @@ public class CustomerServicesImpl implements CustomerServices {
     public Either<CustomerError, List<Customer>> getAll() {
         return customerDAO.getAll();
     }
-   public Either<CustomerError, List<Customer>> add(Customer customer){
+
+    public Either<CustomerError, List<Customer>> add(Customer customer) {
         return customerDAO.add(customer);
-   }
-   public Either<CustomerError, List<Customer>> update(Customer customer){
+    }
+
+    public Either<CustomerError, List<Customer>> update(Customer customer) {
         return customerDAO.update(customer);
     }
 
@@ -42,12 +44,7 @@ public class CustomerServicesImpl implements CustomerServices {
         return customerDAO.delete(customer, deleteOrders);
     }
 
-    @Override
-    public int newId() {
-        List<Customer> customers = customerDAO.getAll().get();
-        customers.sort(Comparator.comparing(Customer::getId));
-        return customers.get(customers.size() - 1).getId() + 1;
-    }
+
 
     @Override
     public Either<OrderError, Order> save(Order order) {
@@ -55,12 +52,12 @@ public class CustomerServicesImpl implements CustomerServices {
     }
 
 
-    public String getNameById(int id){
+    public String getNameById(int id) {
         List<Customer> customers = customerDAO.getAll().get();
         String name = "";
         for (Customer customer : customers) {
             if (customer.getId() == id) {
-                name= customer.getFirst_name();
+                name = customer.getFirst_name();
             }
         }
         return name;

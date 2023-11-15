@@ -17,7 +17,6 @@ public class LoginServicesImpl implements LoginServices {
     }
 
 
-
     public Either<String, List<Credentials>> getAll() {
         return dao.getAll();
     }

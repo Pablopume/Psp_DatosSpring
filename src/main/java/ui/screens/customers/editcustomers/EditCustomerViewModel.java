@@ -30,12 +30,13 @@ public class EditCustomerViewModel {
     public void  voidState(){state.set(new EditCustomerState(null,null));}
 
     public void loadState() {
-        List<Customer> listCust = services.getAll().get();
-        if (listCust.isEmpty()) {
-            state.set(new EditCustomerState(null,"There are no customers"));
+        List<Customer> listCust = new ArrayList<>();
+        if (services.getAll().isEmpty()) {
+            state.set(new EditCustomerState(listCust,"There are no customers"));
 
 
         }else {
+            listCust = services.getAll().get();
             state.set(new EditCustomerState(listCust,null));
         }
     }

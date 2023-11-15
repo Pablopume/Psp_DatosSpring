@@ -17,4 +17,8 @@ public class MenuItem {
     public String toString() {
         return name;
     }
+
+    public double toString2() {
+        return price;
+    }
 }

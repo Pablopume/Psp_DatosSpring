@@ -74,9 +74,9 @@ public class Constants {
     public static final String BTN_OK = "btn-ok";
     public static final String ORDER_DELETED = "Order deleted";
     public static final String THE_ORDER_HAS_BEEN_DELETED = "The order has been deleted.";
-    public static final int THE_CUSTOMER_LIST_IS_EMPTY_N =100 ;
-    public static final String THE_CUSTOMER_LIST_IS_EMPTY_S ="The customer list is empty" ;
-    public static final String THE_ORDER_LIST_IS_EMPTY ="The order list is empty" ;
+    public static final int THE_CUSTOMER_LIST_IS_EMPTY_N = 100;
+    public static final String THE_CUSTOMER_LIST_IS_EMPTY_S = "The customer list is empty";
+    public static final String THE_ORDER_LIST_IS_EMPTY = "The order list is empty";
     public static final String THE_CUSTOMER_LIST_IS_EMPTY = "The customer list is empty";
     public static final String PATH_CUSTOMERS = "pathCustomers";
     public static final String CREATED_INCORRECTLY = "Created incorrectly";
@@ -106,4 +106,6 @@ public class Constants {
     public static final String ORDER_ITEM_ID = "order_item_id";
     public static final String QUANTITY = "quantity";
     public static final String MENU_ITEM_ID2 = "menu_item_id";
+    public static final String SRC_MAIN_RESOURCES_MYSQL_PROPERTIES_XML = "src/main/resources/mysql-properties.xml";
+    public static final String DUPLICATED_USER_NAME = "Duplicated user name";
 }

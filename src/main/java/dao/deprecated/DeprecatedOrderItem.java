@@ -18,7 +18,8 @@ import java.util.List;
 public class DeprecatedOrderItem {
 
     private final DBConnectionPool db;
-@Inject
+
+    @Inject
     public DeprecatedOrderItem(DBConnectionPool db) {
         this.db = db;
     }

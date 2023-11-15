@@ -26,5 +26,6 @@ public class SqlQueries {
     public static final String DELETE_FROM_ORDER_ITEMS_WHERE_ORDER_ID2 = "DELETE FROM order_items WHERE order_id = ?";
     public static final String DELETE_FROM_ORDER_ITEMS_WHERE_ORDER_ID1 = "DELETE FROM order_items WHERE order_id = ?";
     public static final String DELETE_FROM_ORDER_ITEMS_WHERE_ORDER_ID_IN_SELECT_ORDER_ID_FROM_ORDERS_WHERE_CUSTOMER_ID = "DELETE FROM order_items WHERE order_id IN (SELECT order_id FROM orders WHERE customer_id = ?)";
-    public static final String DELETE_FROM_CREDENTIALS_WHERE_ID4 = "Delete from credentials where id=?";
+    public static final String DELETE_FROM_CREDENTIALS_WHERE_ID4 = "Delete from credentials where id = ?";
+    public static final String QUERY = "SELECT oi.order_item_id, oi.order_id, oi.menu_item_id, oi.quantity, mi.name, mi.description, mi.price FROM order_items oi INNER JOIN menu_items mi ON oi.menu_item_id = mi.menu_item_id";
 }

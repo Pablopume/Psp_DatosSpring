@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Credentials;
 import model.Order;
 import model.OrderItem;
 
@@ -28,7 +29,7 @@ public class AddOrderController extends BaseScreenController {
     public TableColumn<Order, Integer> customerId;
     @FXML
     public TableColumn<Order, Integer> tableId;
-
+    Credentials actualuser;
     @FXML
     public ComboBox<String> idCustomer;
     @FXML
@@ -51,17 +52,13 @@ public class AddOrderController extends BaseScreenController {
 
     }
 
-    @Override
-    public void principalLoaded() {
-        addOrderViewModel.loadState();
-    }
+
 
     public void addOrder() {
 
-            int selectedCustomerId = Integer.parseInt(idCustomer.getValue());
+            int selectedCustomerId = actualuser.getId();
             int selectedTableId = Integer.parseInt(table_id.getValue());
-     Order order=       addOrderViewModel.getServices().createOrder(new Order(LocalDateTime.now(),selectedCustomerId,selectedTableId)).get();
-
+     Order order=  addOrderViewModel.getServices().createOrder(new Order(LocalDateTime.now(),selectedCustomerId,selectedTableId)).get();
             List<Order> orders = addOrderViewModel.getServices().getAll().get();
             if((orders.get(orders.size()-1).getDate().getSecond()==order.getDate().getSecond()||orders.get(orders.size()-1).getDate().getSecond()==order.getDate().getSecond()+1 ) && orders.get(orders.size()-1).getDate().getMinute()==order.getDate().getMinute() && orders.get(orders.size()-1).getDate().getHour()==order.getDate().getHour() && orders.get(orders.size()-1).getDate().getDayOfMonth()==order.getDate().getDayOfMonth() && orders.get(orders.size()-1).getDate().getMonth()==order.getDate().getMonth() && orders.get(orders.size()-1).getDate().getYear()==order.getDate().getYear()) {
             for (OrderItem orderItem : ordersXMLTable.getItems()) {
@@ -89,5 +86,11 @@ public class AddOrderController extends BaseScreenController {
         OrderItem selectedOrder = ordersXMLTable.getSelectionModel().getSelectedItem();
           orderItemXMLS.remove(selectedOrder);
           ordersXMLTable.setItems(orderItemXMLS);
+    }
+
+    @Override
+    public void principalLoaded() {
+        addOrderViewModel.loadState();
+        actualuser=getPrincipalController().getActualUser();
     }
 }

@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
 @Named("OrderXMLImpl")
 public class OrderXMLImpl implements OrdersDAO {
     @Override
@@ -39,18 +40,18 @@ public class OrderXMLImpl implements OrdersDAO {
 
     @Override
     public Either<OrderError, Order> save(Order order) {
-        List<OrderItemXML> list= new ArrayList<>();
+        List<OrderItemXML> list = new ArrayList<>();
         order.getOrderItemList().forEach(orderItem -> list.add(new OrderItemXML(orderItem.getId(), orderItem.getIdOrder(), orderItem.getMenuItem().toString(), orderItem.getQuantity())));
-        OrderXML orderXML = new OrderXML(order.getId(),order.getDate(),order.getCustomer_id(), order.getTable_id(), list);
+        OrderXML orderXML = new OrderXML(order.getId(), order.getDate(), order.getCustomer_id(), order.getTable_id(), list);
         try {
-            Path xmlFile = Paths.get("data/"+ order.getCustomer_id());
+            Path xmlFile = Paths.get("data/" + order.getCustomer_id() + ".xml");
             File file = xmlFile.toFile();
-            if(!file.exists()) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
+
             OrdersXML ordersXML = new OrdersXML();
-            boolean fileExists = file.exists();
-            if (fileExists) {
+            if (file.exists() && file.length() != 0) {
                 JAXBContext jaxbContext = JAXBContext.newInstance(OrdersXML.class);
                 Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
                 ordersXML = (OrdersXML) unmarshaller.unmarshal(file);
@@ -73,8 +74,5 @@ public class OrderXMLImpl implements OrdersDAO {
         return null;
     }
 
-    @Override
-    public Either<OrderError, List<Order>> save(List<Order> orders) {
-        return null;
-    }
+
 }
